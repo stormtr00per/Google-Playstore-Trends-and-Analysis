@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": "assist"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles [ \"/home/sarth/Downloads/part-00000-05f6bc47-3946-4249-899c-bb69e6ab3f14-c000.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"nfs://home/sarth/Downloads/part-00000-05f6bc47-3946-4249-899c-bb69e6ab3f14-c000.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"nfs://home/sarth/Downloads/part-00000-05f6bc47-3946-4249-899c-bb69e6ab3f14-c000.csv\"]\n  destination_frame: \"Dataset.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 9\n  single_quotes: false\n  column_names: null\n  column_types: [\"Enum\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\"]\n  delete_on_done: true\n  check_header: -1\n  chunk_size: 26238"
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame"
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame \"Dataset.hex\", [0.7], [\"Dataset.hex_0.70\",\"Dataset.hex_0.30\"], 469673"
+    },
+    {
+      "type": "cs",
+      "input": "buildModel"
+    },
+    {
+      "type": "cs",
+      "input": "buildModel 'drf', {\"model_id\":\"drf-3d06ce96-fe56-42cd-b3f4-bb2942fd983b\",\"training_frame\":\"Dataset.hex_0.70\",\"validation_frame\":\"Dataset.hex_0.30\",\"nfolds\":0,\"response_column\":\"C3\",\"ignored_columns\":[\"C1\"],\"ignore_const_cols\":true,\"ntrees\":50,\"max_depth\":20,\"min_rows\":1,\"nbins\":20,\"seed\":-1,\"mtries\":-1,\"sample_rate\":\"0.6320000290870667\",\"score_each_iteration\":false,\"score_tree_interval\":0,\"nbins_top_level\":1024,\"nbins_cats\":1024,\"r2_stopping\":\"1.7976931348623157e+308\",\"stopping_rounds\":0,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":0.001,\"max_runtime_secs\":0,\"checkpoint\":\"\",\"col_sample_rate_per_tree\":1,\"min_split_improvement\":0.00001,\"histogram_type\":\"AUTO\",\"categorical_encoding\":\"AUTO\",\"distribution\":\"AUTO\",\"custom_metric_func\":\"\",\"export_checkpoints_dir\":\"\",\"build_tree_one_node\":false,\"sample_rate_per_class\":[],\"binomial_double_trees\":false,\"col_sample_rate_change_per_level\":1,\"calibrate_model\":false,\"check_constant_response\":true}"
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"drf-3d06ce96-fe56-42cd-b3f4-bb2942fd983b\""
+    },
+    {
+      "type": "cs",
+      "input": "buildModel"
+    },
+    {
+      "type": "cs",
+      "input": "buildModel 'gbm', {\"model_id\":\"gbm-34eda705-9a0c-4a12-9358-49b71d5c5958\",\"training_frame\":\"Dataset.hex_0.70\",\"validation_frame\":\"Dataset.hex_0.30\",\"nfolds\":0,\"response_column\":\"C3\",\"ignored_columns\":[\"C1\"],\"ignore_const_cols\":true,\"ntrees\":50,\"max_depth\":5,\"min_rows\":10,\"nbins\":20,\"seed\":-1,\"learn_rate\":0.1,\"sample_rate\":1,\"col_sample_rate\":1,\"score_each_iteration\":false,\"score_tree_interval\":0,\"nbins_top_level\":1024,\"nbins_cats\":1024,\"r2_stopping\":\"1.7976931348623157e+308\",\"stopping_rounds\":0,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":0.001,\"max_runtime_secs\":0,\"learn_rate_annealing\":1,\"distribution\":\"AUTO\",\"huber_alpha\":0.9,\"checkpoint\":\"\",\"col_sample_rate_per_tree\":1,\"min_split_improvement\":0.00001,\"histogram_type\":\"AUTO\",\"categorical_encoding\":\"AUTO\",\"custom_metric_func\":\"\",\"custom_distribution_func\":\"\",\"export_checkpoints_dir\":\"\",\"monotone_constraints\":[],\"build_tree_one_node\":false,\"sample_rate_per_class\":[],\"col_sample_rate_change_per_level\":1,\"max_abs_leafnode_pred\":\"1.7976931348623157e+308\",\"pred_noise_bandwidth\":0,\"calibrate_model\":false,\"check_constant_response\":true}"
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"gbm-34eda705-9a0c-4a12-9358-49b71d5c5958\""
+    }
+  ]
+}
